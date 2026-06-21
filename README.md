@@ -22,23 +22,20 @@ A multi-LLM communication evaluation system that scores spoken English proficien
 ## 🏗️ Architecture
 
 ```
-┌────────────┐            ┌──────────┐          ┌───────────┐
-│  Streamlit     │  HTTP      │    Flask    │  HTTPS   │  External     │
-│  Frontend      │ ──────► │   Backend   │ ──────►│  APIs         │
-│  (UI only)     │ ◄────── │ (all logic) │ ◄──────│ (Groq/Gemini/ │
-└────────────┘            └──────────┘          │  Ollama)      │
-                                                         └───────────┘
+┌────────────┐        ┌─────────---─┐        ┌───────────┐
+│  Streamlit │  HTTP  │    Flask    │  HTTPS │ External  │
+│  Frontend  │ ──────►│   Backend   │ ──────►│ APIs      │
+│  (UI only) │ ◄──────│ (all logic) │ ◄──────│(Groq/Gemini│
+└────────────┘        -────────----─┘        │  Ollama)  │
+                                             └───────────┘
 ```
 
 - **Frontend (`frontend/app.py`)** — Streamlit UI. Handles audio input (record/upload), displays results, charts, and improvement tips. Contains no business logic or API keys.
 - **Backend (`backend/app.py`)** — Flask API. Handles transcription, prompt building, parallel LLM scoring (via threading), Excel logging, and serves the results file for download.
 
 ### Data Flow
-```
-Audio Input → Groq Whisper (Transcription) → Feature Extraction
-→ CEFR Prompt → 3 LLMs Scored in Parallel → Averaged Scores
-→ Excel Storage + Dashboard Display
-```
+
+**Audio Input** → **Groq Whisper (Transcription)** → **Feature Extraction** → **CEFR Prompt** → **3 LLMs Scored in Parallel** → **Averaged Scores** → **Excel Storage + Dashboard Display**
 
 ---
 
