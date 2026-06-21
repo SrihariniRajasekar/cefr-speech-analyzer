@@ -1,0 +1,10 @@
+streamlit>=1.32.0
+flask>=3.0.0
+flask-cors>=4.0.0
+python-dotenv>=1.0.0
+requests>=2.31.0
+groq>=0.9.0
+ollama>=0.3.0
+openpyxl>=3.1.0
+plotly>=5.20.0
+audio-recorder-streamlit>=0.0.10
